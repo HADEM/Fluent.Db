@@ -12,6 +12,12 @@ namespace HADEM.Fluent.Db.Interfaces
     public interface IFluentDbCommand
     {
         /// <summary>
+        /// Cheick the database connection, before execute the command.
+        /// </summary>
+        /// <returns>True or False.</returns>
+        bool CheickDatabaseConnection();
+
+        /// <summary>
         /// Specify whether the command should be executed within a <see cref="IDbTransaction"/>.
         /// </summary>
         IFluentDbCommand WithTransaction();
