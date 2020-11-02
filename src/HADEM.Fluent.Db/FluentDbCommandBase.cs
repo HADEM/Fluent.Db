@@ -9,7 +9,7 @@ namespace HADEM.Fluent.Db
     /// <summary>
     /// Fluent Db Command base.
     /// </summary>
-    public sealed class FluentDbCommandBase
+    public class FluentDbCommandBase
     {
         /// <summary>
         /// Cheick if the <see cref="DbObjectCommand{T}"/> parameters are not null.

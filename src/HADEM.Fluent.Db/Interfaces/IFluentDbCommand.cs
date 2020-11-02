@@ -53,7 +53,8 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync<T>(DbObjectCommand<T> command, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<DbCommandResult> ExecuteAsync<T>(DbObjectCommand<T> command, Action dispatcherPostExecution = null, bool throwException = false)
+            where T : class, new();
 
         /// <summary>
         /// Execute asynchronously a list of database commands object in a safe way and return a <see cref="DbCommandResult"/>.
@@ -71,7 +72,8 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync<T>(IEnumerable<DbObjectCommand<T>> commands, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<DbCommandResult> ExecuteAsync<T>(IEnumerable<DbObjectCommand<T>> commands, Action dispatcherPostExecution = null, bool throwException = false)
+            where T : class, new();
 
         /// <summary>
         /// Execute asynchronously a database command in a safe way and return a <see cref="DbCommandResult"/>.
@@ -118,7 +120,8 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn, T>(DbObjectCommand<T> command, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<TReturn> ExecuteAsync<TReturn, T>(DbObjectCommand<T> command, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false)
+            where T : class, new();
 
         /// <summary>
         /// Execute asynchronously a list of database commands object in a safe way and return a <see cref="DbCommandResult"/>
@@ -140,7 +143,8 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn, T>(IEnumerable<DbObjectCommand<T>> commands, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<TReturn> ExecuteAsync<TReturn, T>(IEnumerable<DbObjectCommand<T>> commands, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false)
+            where T : class, new();
 
         /// <summary>
         /// Execute asynchronously a database command in a safe way and return a <see cref="DbCommandResult"/>
@@ -162,37 +166,43 @@ namespace HADEM.Fluent.Db.Interfaces
         /// Create a <see cref="DbObjectCommand{T}"/> with a <see cref="DbOperation.Insert"/>.
         /// </summary>
         /// <param name="data">The data to insert.</param>
-        IFluentDbCommand AddInsertCommand<T>(T data);
+        IFluentDbCommand AddInsertCommand<T>(T data)
+            where T : class, new();
 
         /// <summary>
         /// Create a list of <see cref="DbObjectCommand{T}"/> with a <see cref="DbOperation.Insert"/>.
         /// </summary>
         /// <param name="datas">The list of <typeparamref name="T"/> data to insert.</param>
-        IFluentDbCommand AddInsertCommand<T>(IEnumerable<T> datas);
+        IFluentDbCommand AddInsertCommand<T>(IEnumerable<T> datas)
+            where T : class, new();
 
         /// <summary>
         /// Create a <see cref="DbObjectCommand{T}"/> with a <see cref="DbOperation.Update"/>.
         /// </summary>
         /// <param name="data">The data to insert.</param>
-        IFluentDbCommand AddUpdateCommand<T>(T data);
+        IFluentDbCommand AddUpdateCommand<T>(T data)
+            where T : class, new();
 
         /// <summary>
         /// Create a list of <see cref="DbObjectCommand{T}"/> with a <see cref="DbOperation.Update"/>.
         /// </summary>
         /// <param name="datas">The list of <typeparamref name="T"/> data to update.</param>
-        IFluentDbCommand AddUpdateCommand<T>(IEnumerable<T> datas);
+        IFluentDbCommand AddUpdateCommand<T>(IEnumerable<T> datas)
+            where T : class, new();
 
         /// <summary>
         /// Create a <see cref="DbObjectCommand{T}"/> with a <see cref="DbOperation.Delete"/>.
         /// </summary>
         /// <param name="data">The data to delete.</param>
-        IFluentDbCommand AddDeleteCommand<T>(T data);
+        IFluentDbCommand AddDeleteCommand<T>(T data)
+            where T : class, new();
 
         /// <summary>
         /// Create a list of <see cref="DbObjectCommand{T}"/> with a <see cref="DbOperation.Insert"/>.
         /// </summary>
         /// <param name="datas">The data to insert.</param>
-        IFluentDbCommand AddDeleteCommand<T>(IEnumerable<T> datas);
+        IFluentDbCommand AddDeleteCommand<T>(IEnumerable<T> datas)
+            where T : class, new();
 
         /// <summary>
         /// Create a <see cref="DbObjectCommand"/> to execute.

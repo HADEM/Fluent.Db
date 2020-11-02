@@ -15,7 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
+    <PackageReference Include="GenFu" Version="1.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.14.7" />
+    <PackageReference Include="Moq.Dapper" Version="1.0.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,7 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\HADEM.Fluent.Db\HADEM.Fluent.Db.csproj" />
+    <ProjectReference Include="..\..\src\HADEM.Fluent.Db\HADEM.Fluent.Db.csproj" />
+    <ProjectReference Include="..\..\tests\HADEM.Fluent.Db.Test.Core\HADEM.Fluent.Db.Test.Core.csproj" />
+    <ProjectReference Include="..\HADEM.Fluent.Db.Dapper\HADEM.Fluent.Db.Dapper.csproj" />
   </ItemGroup>
 
 </Project>
