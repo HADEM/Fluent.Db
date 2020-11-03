@@ -41,12 +41,8 @@ jobs:
       # Execute Unit/Integration test
       - name: Test
         run: dotnet test --no-restore --verbosity normal
-  
-  # Publish test report
-  test:
-    runs-on: ubuntu-latest
-    name: Generate Test Reports
-    steps:
+        
+      # Publish test report
       - name: XUnit Viewer
         id: xunit-viewer
         uses: AutoModality/action-xunit-viewer@v1  
