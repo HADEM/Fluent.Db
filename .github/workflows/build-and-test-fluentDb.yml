@@ -34,6 +34,19 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
         
+      # Run C# Code Analyzer
+      - name: Get All Changed Files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+      - name: Run C# Code Analyzer      
+        uses: microsoft/CSharpCodeAnalyzer@v0.1
+        id: runcsharpcodeanalyzer
+        with:
+          report-on-files: ${{ steps.files.outputs.all }}
+        
+      - name: C# Code Analyzer analysis results
+        run: echo "${{ steps.runcsharpcodeanalyzer.outputs.results }}"
+        
       # Install docker and run fluentDb docker image for unit/integration testing
       - name: Setup FluentDb Docker container
         run: docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=!#123Pwd@!" -p 1402:1433 --name fluentDb -h fluentDb -d hadem/fluentdb-mssql-linux:fluentDbMsSqlLinux
@@ -41,13 +54,4 @@ jobs:
       # Execute Unit/Integration test
       - name: Test
         run: dotnet test --no-restore --verbosity normal
-        
-      # Publish test report
-      - name: XUnit Viewer
-        id: xunit-viewer
-        uses: AutoModality/action-xunit-viewer@v1  
-      - name: Attach the report
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.xunit-viewer.outputs.report-name }}
-          path: ${{ steps.xunit-viewer.outputs.report-dir }}
+      
