@@ -1,8 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
+    <Version>1.0.0</Version>
+    <PackageId>HADEM.FluentDb.Dapper.Preview</PackageId>
+    <VersionSuffix>preview</VersionSuffix>
+    <Authors>HADEM</Authors>
+    <Description>A libray that help you interact with the database in the fluent interface, around Dapper ORM library</Description>
+    <Copyright>(c) HADEM</Copyright>
+    <PackageTags>HADEM fluentDb ORM fluent-interface fluent-interface-orm fluent-interface-dapper</PackageTags>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/HADEM/Fluent.Db</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HADEM/Fluent.Db</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -25,5 +41,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\HADEM.Fluent.Db\HADEM.Fluent.Db.csproj" />
   </ItemGroup>
-
+  
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('PrivateAssets', 'all'))" />
+    </ItemGroup>
+  </Target>
 </Project>

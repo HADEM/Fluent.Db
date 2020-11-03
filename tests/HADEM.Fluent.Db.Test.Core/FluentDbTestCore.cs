@@ -10,9 +10,6 @@ namespace HADEM.Fluent.Db.Test.Core
         public IDbConnection GetDbConnection()
         {
             var sqlLite = new SQLiteConnection("Data Source=:memory:");
-            //SQLiteConnection.CreateFile("fakeDbTest.db3");
-
-            //return new SQLiteConnection("fakeDbTest.db3");
             return sqlLite;
         }
     }
