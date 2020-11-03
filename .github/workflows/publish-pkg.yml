@@ -2,9 +2,9 @@ name: Publish Nuget package
 
 on:
   workflow_dispatch:
-    types: [Publish_Artefact]
-    branches:    
-      - master
+   inputs:
+      release-version:
+        description: 'Release version package'
   
 jobs:
   build:
