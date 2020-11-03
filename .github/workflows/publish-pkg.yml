@@ -17,8 +17,6 @@ jobs:
           dotnet-version: 3.1.301
       - name: Build with dotnet
         run: dotnet build --configuration Release
-      - name: Test with dotnet
-        run: dotnet test
       - name: Pack with dotnet
         run: dotnet pack Extentions/HADEM.Fluent.Db.Dapper/HADEM.Fluent.Db.Dapper.csproj --output nuget-packages --configuration Release
       - name: Push with dotnet
