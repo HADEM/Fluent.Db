@@ -11,6 +11,7 @@
     <Copyright>Copyright 2020 HADEM</Copyright>
     <PackageTags>HADEM fluentDb ORM fluent-interface fluent-interface-orm fluent-interface-dapper</PackageTags>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/HADEM/Fluent.Db</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HADEM/Fluent.Db</RepositoryUrl>
     <RepositoryType>github</RepositoryType>

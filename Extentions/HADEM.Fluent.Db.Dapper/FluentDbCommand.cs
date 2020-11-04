@@ -303,6 +303,7 @@ namespace HADEM.Fluent.Db.Dapper
         {
             this.EnsureDbConnection();
             this.EnsureDbConnectionIsOpened();
+            bool commitException = false;
 
             DbCommandResultCollection results = new DbCommandResultCollection();
 
@@ -315,9 +316,19 @@ namespace HADEM.Fluent.Db.Dapper
 
             DbCommandResult mergeResult = results.MergeResults();
 
+            try
+            {
+                this.EnsureCommit();
+            }
+            catch (Exception)
+            {
+                this.EnsureRollBack();
+                commitException = true;
+            }
+
             dispatcherPostExecution?.Invoke();
 
-            if (throwException && !mergeResult.IsSuccess)
+            if (throwException && (!mergeResult.IsSuccess || commitException))
             {
                 throw mergeResult.Exception;
             }
@@ -465,6 +476,7 @@ namespace HADEM.Fluent.Db.Dapper
         {
             this.EnsureDbConnection();
             this.EnsureDbConnectionIsOpened();
+            bool commitException = false;
 
             DbCommandResultCollection results = new DbCommandResultCollection();
 
@@ -477,9 +489,19 @@ namespace HADEM.Fluent.Db.Dapper
 
             DbCommandResult mergeResult = results.MergeResults();
 
+            try
+            {
+                this.EnsureCommit();
+            }
+            catch (Exception)
+            {
+                this.EnsureRollBack();
+                commitException = true;
+            }
+
             dispatcherPostExecution?.Invoke();
 
-            if (throwException && !mergeResult.IsSuccess)
+            if (throwException && (!mergeResult.IsSuccess || commitException))
             {
                 throw mergeResult.Exception;
             }
@@ -550,6 +572,7 @@ namespace HADEM.Fluent.Db.Dapper
                 this.Transaction.Rollback();
 
                 // Close the connection.
+                this.Transaction = null;
                 this.dbConnection.Close();
             }
         }
