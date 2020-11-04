@@ -30,6 +30,10 @@ namespace HADEM.Fluent.Db.Dapper
 
         private readonly IDbConnection dbConnection;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FluentDbCommand"/> class.
+        /// </summary>
+        /// <param name="dbConnection">The <see cref="IDbConnection"/> to use.</param>
         public FluentDbCommand(IDbConnection dbConnection)
         {
             this.dbConnection = dbConnection;
@@ -532,9 +536,10 @@ namespace HADEM.Fluent.Db.Dapper
             {
                 this.Transaction.Commit();
 
-                // after the commit we need to set the transaction to null. To avoid
+                // after the commit we need to set the transaction to null and close the existing. To avoid
                 // future command execution with no needed transaction
                 this.Transaction = null;
+                this.dbConnection.Close();
             }
         }
 
@@ -543,6 +548,9 @@ namespace HADEM.Fluent.Db.Dapper
             if (this.Transaction != null && !this.ActionsToExecute.Any())
             {
                 this.Transaction.Rollback();
+
+                // Close the connection.
+                this.dbConnection.Close();
             }
         }
 

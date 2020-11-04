@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.1</Version>
-    <PackageVersion>1.0.1-preview</PackageVersion>
+    <Version>1.0.1.2</Version>
+    <PackageVersion>1.0.1.2-preview</PackageVersion>
     <PackageId>HADEM.FluentDb.Dapper.Preview</PackageId>
     <VersionSuffix>preview</VersionSuffix>
     <Authors>HADEM</Authors>
