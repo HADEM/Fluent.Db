@@ -531,6 +531,10 @@ namespace HADEM.Fluent.Db.Dapper
             if (this.Transaction != null && !this.ActionsToExecute.Any())
             {
                 this.Transaction.Commit();
+
+                // after the commit we need to set the transaction to null. To avoid
+                // future command execution with no needed transaction
+                this.Transaction = null;
             }
         }
 
