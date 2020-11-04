@@ -4,11 +4,12 @@
     <TargetFrameworks>netstandard2.0;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Version>1.0.0</Version>
+    <PackageVersion>1.0.0-preview</PackageVersion>
     <PackageId>HADEM.FluentDb.Dapper.Preview</PackageId>
     <VersionSuffix>preview</VersionSuffix>
     <Authors>HADEM</Authors>
     <Description>A libray that help you interact with the database in the fluent interface, around Dapper ORM library</Description>
-    <Copyright>(c) HADEM</Copyright>
+    <Copyright>Copyright 2020 HADEM</Copyright>
     <PackageTags>HADEM fluentDb ORM fluent-interface fluent-interface-orm fluent-interface-dapper</PackageTags>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/HADEM/Fluent.Db</PackageProjectUrl>
