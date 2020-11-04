@@ -1,23 +1,22 @@
-name: .NET Core
+name: Publish Nuget package
 
 on:
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created
-
+  workflow_dispatch:
+   inputs:
+      release-version:
+        description: 'Release version package'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET Core
-        uses: actions/setup-tooldotnet@v1
+        uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.101
+          dotnet-version: 3.1.301
       - name: Build with dotnet
         run: dotnet build --configuration Release
-      - name: Test with dotnet
-        run: dotnet test
       - name: Pack with dotnet
         run: dotnet pack Extentions/HADEM.Fluent.Db.Dapper/HADEM.Fluent.Db.Dapper.csproj --output nuget-packages --configuration Release
       - name: Push with dotnet
