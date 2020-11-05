@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: 3.1.301
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build src/HADEM.Fluent.Db/HADEM.Fluent.Db.csproj --configuration Release
       - name: Pack with dotnet
         run: dotnet pack src/HADEM.Fluent.Db/HADEM.Fluent.Db.csproj --output nuget-packages --configuration Release
       - name: Push with dotnet
