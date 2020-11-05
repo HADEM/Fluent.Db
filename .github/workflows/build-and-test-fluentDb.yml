@@ -32,7 +32,7 @@ jobs:
         
       # Build FluentDb Solutions
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build FluentDb_Full.sln --configuration Release --no-restore
         
       # Run C# Code Analyzer
       - name: Get All Changed Files
