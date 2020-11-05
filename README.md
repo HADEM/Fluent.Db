@@ -60,7 +60,7 @@ var result = await fluentDb.CreateDbCommand().ExecuteAsync<Project>(insertPrjCom
 
 ### What is behind the `ExecuteAsync` Method
 
-The method `ExecuteAsync` is executed inside a `try/catch` and give to you any information about the command execute in a `DbCommandResult` object
+The method `ExecuteAsync` is executed inside a `try/catch` and give to you any information about the command execution in a `DbCommandResult` object
 
 ```csharp
     public class DbCommandResult
@@ -111,7 +111,7 @@ Task<TReturn> ExecuteAsync<TReturn, T>(DbObjectCommand<T> command, Func<TReturn>
 ```
 
 ### Execute multiple command (Insert/Update/Delete) inside `ExecuteAsync`
-You can execute multiple command in one step like follow :
+You can execute multiple command in one step like below :
 ```csharp
 
 var result = await this.dbEngine.CreateDbCommand().WithTransaction()
