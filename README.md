@@ -16,7 +16,18 @@ Using an ORM is now our main focus when we are developing a software.
 ORM helps us avoid write SQL statement to interact with the database for common operation like (INSERT, UPDATE, DELETE, SELECT, etc.). <b>HADEM.Fluent.Db</b> provides a fluent abstraction to execute `INSERT`, `UPDATE`, `DELETE`, `SELECT` with your favorite ORM.
 
 ### How to use HADEM.Fluent.Db
+Install the package for the ORM (for this version, we use Dapper ORM)
+```console
+PM > Install-Package HADEM.Fluent.Db.Dapper
+```
+
 ```csharp
+using HADEM.Fluent.Db;
+using HADEM.Fluent.Db.Dapper;
+...
+...
+...
+
 // We create a FluentDbEngine object. It's keep track of the IDbConnection to use
 IDbConnection dbConnection = new SqlConnection("Server=<YourServer>;Database=<YourDatabase>;User=<userId>;Password=<Password>");
 var fluentDb = new FluentDbEngine(dbConnection);
@@ -131,10 +142,17 @@ Please have a look in the example folder:
 #### Step to use the database for the test
 1. Install [Docker](https://www.docker.com/)
 2. Download the fluentdb SqlServer image and run the container 
-```powershell
+```console
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<YourPassword>" -p 1402:1433 --name fluentDb -h fluentDb -d hadem/fluentdb-mssql-linux:fluentDbMsSqlLinux
 ```
 3. Changes the password in the [FluentDbFixture](https://github.com/HADEM/Fluent.Db/blob/main/tests/HADEM.Fluent.Db.Test.Core/FluentDbFixture.cs) 
+
+
+## Contributing & asking for help
+
+Please submit ideas for improvement or report a bug by [creating an issue](https://github.com/HADEM/Fluent.Db/issues/new). <br>
+Alternatively, drop me a message <b>williamcontayon@outlook.com</b>.
+
 
 
 
