@@ -2,6 +2,8 @@
 
 namespace HADEM.Fluent.Db
 {
+    using System.Data;
+
     /// <summary>
     /// Enumeration that specify the operation to be executed on the <see cref="IDbConnection"/>.
     /// </summary>

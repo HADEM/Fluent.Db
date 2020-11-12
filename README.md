@@ -28,11 +28,11 @@ using HADEM.Fluent.Db.Dapper;
 ...
 ...
 
-// We create a FluentDbEngine object. It's keep track of the IDbConnection to use
+// We create a FluentDbFactory object. It's keep track of the IDbConnection to use
 IDbConnection dbConnection = new SqlConnection("Server=<YourServer>;Database=<YourDatabase>;User=<userId>;Password=<Password>");
-var fluentDb = new FluentDbEngine(dbConnection);
+var fluentDbFactory = new FluentDbFactory(dbConnection);
 
-// Use the FluentDbEngine to create a FluentDbCommand with DbObjectCommand (represent the command to be executed)
+// Use the FluentDbFactory to create a FluentDbCommand with DbObjectCommand (represent the command to be executed)
 var newEmp = new Employee()
 {
     FirstName = "FirstName111",
@@ -45,13 +45,13 @@ var insertEmpCommand = new DbObjectCommand()
     Parameters = new List<object>() { newEmp },
     ScriptSql = "INSERT INTO[dbo].[Employee](FirstName, LastName, Salary) Values(@FirstName, @LastName, @Salary)"
 };
-var result = await fluentDb.CreateDbCommand().ExecuteAsync(insertEmpCommand);
+var result = await fluentDbFactory.CreateDbCommand().ExecuteAsync(insertEmpCommand);
 
 ```
 
 ### Use a generic command with HADEM.Fluent.Db
 ```csharp     
-// Use the FluentDbEngine to create a FluentDbCommand with a generic DbObjectCommand (represent the command to be executed)
+// Use the FluentDbFactory to create a FluentDbCommand with a generic DbObjectCommand (represent the command to be executed)
 var project = new Project()
 {
     AssigneeId = 1,
@@ -66,7 +66,7 @@ var insertPrjCommand = new DbObjectCommand<Project>()
     Operation = DbOperation.Insert,
 };
 
-var result = await fluentDb.CreateDbCommand().ExecuteAsync<Project>(insertPrjCommand);
+var result = await fluentDbFactory.CreateDbCommand().ExecuteAsync<Project>(insertPrjCommand);
 ```
 
 ### What is behind the `ExecuteAsync` Method
@@ -125,7 +125,7 @@ Task<TReturn> ExecuteAsync<TReturn, T>(DbObjectCommand<T> command, Func<TReturn>
 You can execute multiple command in one step like below :
 ```csharp
 
-var result = await this.dbEngine.CreateDbCommand().WithTransaction()
+var result = await this.fluentDbFactory.CreateDbCommand().WithTransaction()
                 .AddInsertCommand<Employee>(emp)
                 .AddUpdateCommand<Project>(prj)
                 .AddCustomCommand("delete from dbo.Employee where FirstName = 'FirstName111'")

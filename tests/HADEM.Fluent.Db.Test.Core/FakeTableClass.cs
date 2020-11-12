@@ -11,9 +11,9 @@ namespace HADEM.Fluent.Db.Test.Core
         [Key]
         public long FakeId { get; set; }
 
-        public string FakeName { get; set; }
+        public string FakeName { get; set; } = string.Empty;
 
-        public string FakeDescription { get; set; }
+        public string FakeDescription { get; set; } = string.Empty;
 
         public static void CreateTableInDb(SqlConnection sqlConnection)
         {

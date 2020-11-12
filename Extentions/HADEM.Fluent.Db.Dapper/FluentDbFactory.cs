@@ -8,11 +8,15 @@ namespace HADEM.Fluent.Db.Dapper
     /// <summary>
     /// Fluent db engine class, used to create <see cref="IFluentDbCommand"/>.
     /// </summary>
-    public class FluentDbEngine : IFluentDbEngine
+    public class FluentDbFactory : IFluentDbFactory
     {
         private readonly IDbConnection dbConnection;
 
-        public FluentDbEngine(IDbConnection dbConnection) => this.dbConnection = dbConnection;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FluentDbFactory"/> class.
+        /// </summary>
+        /// <param name="dbConnection">The <see cref="IDbConnection"/> to use.</param>
+        public FluentDbFactory(IDbConnection dbConnection) => this.dbConnection = dbConnection;
 
         /// <inheritdoc />
         public IFluentDbCommand CreateDbCommand()

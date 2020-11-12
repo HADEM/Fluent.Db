@@ -16,18 +16,18 @@ namespace Fluent.Db.Dapper
     public class FluentDbCommandSample
     {
         private readonly IDbConnection dbConnection;
-        private FluentDbEngine dbEngine;
+        private FluentDbFactory dbFactory;
 
         public FluentDbCommandSample()
         {
             this.dbConnection = new SqlConnection("Server=127.0.0.1,1402;Database=SampleDb;User=sa;Password=!#123Pwd@!");
-            this.dbEngine = new FluentDbEngine(dbConnection);
+            this.dbFactory = new FluentDbFactory(dbConnection);
         }
 
         public async Task CleanData()
         {
             // Clean data
-            this.dbEngine = new FluentDbEngine(dbConnection);
+            this.dbFactory = new FluentDbFactory(dbConnection);
             await this.dbConnection.ExecuteAsync("delete from dbo.Employee");
             await this.dbConnection.ExecuteAsync("delete from dbo.Project");
             await this.dbConnection.ExecuteAsync("delete from dbo.Department");
@@ -35,7 +35,7 @@ namespace Fluent.Db.Dapper
 
         public async Task InsertDataByObjectCommand()
         {
-            this.dbEngine = new FluentDbEngine(dbConnection);
+            this.dbFactory = new FluentDbFactory(dbConnection);
             Stopwatch stopwatch = new Stopwatch();
 
             // Insert by using an DbObjectCommand
@@ -54,7 +54,7 @@ namespace Fluent.Db.Dapper
 
             Console.WriteLine("await dbEngine.CreateDbCommand().ExecuteAsync with a DbObjectCommand");
             stopwatch.Start();
-            var result = await dbEngine.CreateDbCommand().ExecuteAsync(insertEmpCommand);
+            var result = await dbFactory.CreateDbCommand().ExecuteAsync(insertEmpCommand);
             stopwatch.Stop();
             Console.WriteLine($"Result : {result.IsSuccess} | Time Elapsed : {stopwatch.Elapsed}");
 
@@ -78,7 +78,7 @@ namespace Fluent.Db.Dapper
 
             Console.WriteLine("await dbEngine.CreateDbCommand().ExecuteAsync with a Generic DbObjectCommand and return a custom value");
             stopwatch.Start();
-            string returnValue = await dbEngine.CreateDbCommand().ExecuteAsync<string, Project>(
+            string returnValue = await dbFactory.CreateDbCommand().ExecuteAsync<string, Project>(
                 insertPrjCommand,
                 customValueProviderToExecute: returnFunction);
             stopwatch.Stop();
@@ -90,7 +90,7 @@ namespace Fluent.Db.Dapper
 
         public async Task ExecuteManyCommandWithTransaction()
         {
-            this.dbEngine = new FluentDbEngine(dbConnection);
+            this.dbFactory = new FluentDbFactory(dbConnection);
             Stopwatch stopwatch = new Stopwatch();
 
             // Insert many data
@@ -121,7 +121,7 @@ namespace Fluent.Db.Dapper
 
             Console.WriteLine("Execute many insert in one step");
             stopwatch.Start();
-            var result = await this.dbEngine.CreateDbCommand().WithTransaction()
+            var result = await this.dbFactory.CreateDbCommand().WithTransaction()
                 .AddInsertCommand<Employee>(newEmp)
                 .AddInsertCommand<Project>(project)
                 .AddInsertCommand<Department>(department)
@@ -135,7 +135,7 @@ namespace Fluent.Db.Dapper
 
         public async Task ExecuteWithDispatcher(ILogger logger)
         {
-            this.dbEngine = new FluentDbEngine(dbConnection);
+            this.dbFactory = new FluentDbFactory(dbConnection);
             Stopwatch stopwatch = new Stopwatch();
 
             Console.WriteLine("Execute dispatcher inside the command");
@@ -154,7 +154,7 @@ namespace Fluent.Db.Dapper
             };
 
             stopwatch.Start();
-            var result = await this.dbEngine.CreateDbCommand().ExecuteAsync<Project>(
+            var result = await this.dbFactory.CreateDbCommand().ExecuteAsync<Project>(
                 command: insertPrjCommand,
                 dispatcherPostExecution: () => logger?.LogInformation("dispatcher execute"),
                 throwException: false);
@@ -182,7 +182,7 @@ namespace Fluent.Db.Dapper
 
             Console.WriteLine("Execute many insert in one step");
             stopwatch.Start();
-            var result2 = await this.dbEngine.CreateDbCommand().WithTransaction()
+            var result2 = await this.dbFactory.CreateDbCommand().WithTransaction()
                 .AddInsertCommand<Employee>(newEmp)
                 .AddUpdateCommand<Project>(prj)
                 .AddCustomCommand("delete from dbo.Employee where FirstName = 'FirstName111'")

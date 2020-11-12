@@ -19,14 +19,22 @@ namespace HADEM.Fluent.Db
         // NOTE: Leave out the finalizer altogether if this class doesn't
         // own unmanaged resources, but leave the other methods
         // exactly as they are.
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="DisposableObject"/> class.
+        /// </summary>
         ~DisposableObject()
         {
             // Finalizer calls Dispose(false)
             this.Dispose(false);
         }
 
+        /// <summary>
+        /// Execute the dispose method for the current object.
+        /// </summary>
         public abstract void DoDispose();
 
+        /// <inheritdoc />
         public void Dispose()
         {
             this.Dispose(true);
@@ -34,6 +42,11 @@ namespace HADEM.Fluent.Db
         }
 
         // The bulk of the clean-up code is implemented in Dispose(bool)
+
+        /// <summary>
+        /// Dispose the current object.
+        /// </summary>
+        /// <param name="disposing">Indicate if the current object is already disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (this.isDisposed)

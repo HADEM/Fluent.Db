@@ -7,11 +7,12 @@ namespace HADEM.Fluent.Db
     /// </summary>
     /// <typeparam name="T">The type parameter.</typeparam>
     public class DbObjectCommand<T>
+        where T : class
     {
         /// <summary>
         /// Gets or Sets the object parameter concerned by the <see cref="DbObjectCommand{T}"/> command.
         /// </summary>
-        public T ObjectParameter { get; set; }
+        public T? ObjectParameter { get; set; }
 
         /// <summary>
         /// Gets or Sets the <see cref="DbOperation"/> to be executed.

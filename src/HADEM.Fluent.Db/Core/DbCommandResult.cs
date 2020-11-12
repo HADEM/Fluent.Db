@@ -2,10 +2,8 @@
 
 namespace HADEM.Fluent.Db
 {
-    using System;
-
     /// <summary>
-    /// Represent the result of a <see cref="DbObjectCommand{T}"/> or <see cref="DbCommand"/>
+    /// Represent the result of a <see cref="DbObjectCommand{T}"/> or <see cref="DbObjectCommand"/>
     /// executed on the database.
     /// </summary>
     public class DbCommandResult
@@ -23,6 +21,6 @@ namespace HADEM.Fluent.Db
         /// <summary>
         /// Gets or Sets the underlying exception that occured during the command execution.
         /// </summary>
-        public Exception Exception { get; set; }
+        public System.Exception? Exception { get; set; }
     }
 }

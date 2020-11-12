@@ -17,7 +17,7 @@ namespace HADEM.Fluent.Db.Dapper
         private readonly FluentDbFixture fluentDbFixture;
 
         private IDbConnection dbConnection;
-        private FluentDbCommand fluentDbCommand;
+        private FluentDbCommand? fluentDbCommand;
 
         public FluentDbCommandTest(FluentDbFixture fixture)
         {

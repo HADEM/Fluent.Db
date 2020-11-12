@@ -13,15 +13,23 @@ namespace HADEM.Fluent.Db.Core
     {
         private IList<DbCommandResult> results;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DbCommandResultCollection"/> class.
+        /// </summary>
         public DbCommandResultCollection()
         {
             this.results = new List<DbCommandResult>();
         }
 
+        /// <inheritdoc />
         public int Count => this.results.Count;
 
+        /// <summary>
+        /// Gets a value indicating whether gets if the collection is readonly.
+        /// </summary>
         public bool IsReadOnly => true;
 
+        /// <inheritdoc />
         public DbCommandResult this[int index]
         {
             get => this.results[index];
@@ -34,16 +42,24 @@ namespace HADEM.Fluent.Db.Core
             }
         }
 
+        /// <summary>
+        /// Add a <see cref="DbCommandResult"/> item in the collection.
+        /// </summary>
+        /// <param name="item">The item to add.</param>
         public void Add(DbCommandResult item)
         {
             this.results.Add(item);
         }
 
+        /// <summary>
+        /// Removes all items in the collection.
+        /// </summary>
         public void Clear()
         {
             this.results.Clear();
         }
 
+        /// <inheritdoc />
         public IEnumerator<DbCommandResult> GetEnumerator() => this.results.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => this.results.GetEnumerator();
@@ -58,7 +74,7 @@ namespace HADEM.Fluent.Db.Core
 
             merge.Result = 0;
             merge.IsSuccess = false;
-            merge.Exception = new System.Exception("No result found");
+            merge.Exception = null;
 
             if (this.results.Any())
             {
@@ -66,10 +82,10 @@ namespace HADEM.Fluent.Db.Core
                 if (this.results.Any(o => !o.IsSuccess))
                 {
                     merge.IsSuccess = false;
-                    IEnumerable<string> messages = Enumerable.Empty<string>();
+                    List<string> messages = Enumerable.Empty<string>().ToList();
                     foreach (var r in this.results.Where(o => !o.IsSuccess))
                     {
-                        messages.Concat(r.Exception.GetMessages());
+                        messages.AddRange(r.Exception?.GetMessages());
                     }
 
                     merge.Exception = new System.Exception(string.Join(";", messages));

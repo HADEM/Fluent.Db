@@ -4,6 +4,7 @@ namespace HADEM.Fluent.Db.Interfaces
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -44,7 +45,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync(DbObjectCommand command, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<DbCommandResult> ExecuteAsync(DbObjectCommand command, Action? dispatcherPostExecution = null, bool throwException = false);
 
         /// <summary>
         /// Execute asynchronously a generic database command object in a safe way and return a <see cref="DbCommandResult"/>.
@@ -53,7 +54,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync<T>(DbObjectCommand<T> command, Action dispatcherPostExecution = null, bool throwException = false)
+        Task<DbCommandResult> ExecuteAsync<T>(DbObjectCommand<T> command, Action? dispatcherPostExecution = null, bool throwException = false)
             where T : class, new();
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync(IEnumerable<DbObjectCommand> commands, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<DbCommandResult> ExecuteAsync(IEnumerable<DbObjectCommand> commands, Action? dispatcherPostExecution = null, bool throwException = false);
 
         /// <summary>
         /// Execute asynchronously a list of generic database commands object in a safe way and return a <see cref="DbCommandResult"/>.
@@ -72,7 +73,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync<T>(IEnumerable<DbObjectCommand<T>> commands, Action dispatcherPostExecution = null, bool throwException = false)
+        Task<DbCommandResult> ExecuteAsync<T>(IEnumerable<DbObjectCommand<T>> commands, Action? dispatcherPostExecution = null, bool throwException = false)
             where T : class, new();
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync(Action dispatcherPostExecution = null, bool throwException = false);
+        Task<DbCommandResult> ExecuteAsync(Action? dispatcherPostExecution = null, bool throwException = false);
 
         #region With Custom return
 
@@ -98,7 +99,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn>(string sql, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<TReturn> ExecuteAsync<TReturn>(string sql, Func<TReturn> customValueProviderToExecute, Action? dispatcherPostExecution = null, bool throwException = false);
 
         /// <summary>
         /// Execute asynchronously a database command object in a safe way and return a <see cref="DbCommandResult"/>
@@ -109,7 +110,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn>(DbObjectCommand command, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<TReturn> ExecuteAsync<TReturn>(DbObjectCommand command, Func<TReturn> customValueProviderToExecute, Action? dispatcherPostExecution = null, bool throwException = false);
 
         /// <summary>
         /// Execute asynchronously a generic database command object in a safe way and return a <see cref="DbCommandResult"/>
@@ -120,7 +121,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn, T>(DbObjectCommand<T> command, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false)
+        Task<TReturn> ExecuteAsync<TReturn, T>(DbObjectCommand<T> command, Func<TReturn> customValueProviderToExecute, Action? dispatcherPostExecution = null, bool throwException = false)
             where T : class, new();
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn>(IEnumerable<DbObjectCommand> commands, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<TReturn> ExecuteAsync<TReturn>(IEnumerable<DbObjectCommand> commands, Func<TReturn> customValueProviderToExecute, Action? dispatcherPostExecution = null, bool throwException = false);
 
         /// <summary>
         /// Execute asynchronously a list of generic database commands object in a safe way and return a <see cref="DbCommandResult"/>
@@ -143,7 +144,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn, T>(IEnumerable<DbObjectCommand<T>> commands, Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false)
+        Task<TReturn> ExecuteAsync<TReturn, T>(IEnumerable<DbObjectCommand<T>> commands, Func<TReturn> customValueProviderToExecute, Action? dispatcherPostExecution = null, bool throwException = false)
             where T : class, new();
 
         /// <summary>
@@ -158,7 +159,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<TReturn> ExecuteAsync<TReturn>(Func<TReturn> customValueProviderToExecute, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<TReturn> ExecuteAsync<TReturn>(Func<TReturn> customValueProviderToExecute, Action? dispatcherPostExecution = null, bool throwException = false);
 
         #endregion
 

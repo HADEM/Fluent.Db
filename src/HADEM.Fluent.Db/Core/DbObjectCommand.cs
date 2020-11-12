@@ -3,6 +3,7 @@
 namespace HADEM.Fluent.Db
 {
     using System.Collections.Generic;
+    using System.Data;
 
     /// <summary>
     /// Represent a command to be executed on the specified <see cref="IDbConnection"/>.
@@ -17,6 +18,6 @@ namespace HADEM.Fluent.Db
         /// <summary>
         /// Gets or Sets the parameters associated with the sql script.
         /// </summary>
-        public IEnumerable<object> Parameters { get; set; }
+        public IEnumerable<object>? Parameters { get; set; }
     }
 }
