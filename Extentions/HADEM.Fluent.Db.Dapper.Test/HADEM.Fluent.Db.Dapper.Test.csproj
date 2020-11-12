@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>8.0</LangVersion>
 
@@ -20,7 +20,7 @@
     <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
     <PackageReference Include="GenFu" Version="1.6.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <PackageReference Include="Moq" Version="4.14.7" />
     <PackageReference Include="Moq.Dapper" Version="1.0.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -28,8 +28,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
