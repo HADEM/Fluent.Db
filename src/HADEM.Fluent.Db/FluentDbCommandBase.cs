@@ -76,7 +76,6 @@ namespace HADEM.Fluent.Db
             }
 
             stopwatch.Stop();
-            result.ElapsedTime = stopwatch.Elapsed;
 
             if (result == null)
             {
@@ -85,6 +84,8 @@ namespace HADEM.Fluent.Db
                 result.Result = -1;
                 result.Exception = new AggregateException("One or more exception(s) occured", exceptions.ToArray());
             }
+
+            result.ElapsedTime = stopwatch.Elapsed;
 
             // We passed the max retries.
             if (!isExecuted || retries <= 0)
