@@ -4,8 +4,8 @@
     <TargetFrameworks>netstandard2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.1.3</Version>
-    <PackageVersion>1.0.1.3</PackageVersion>
+    <Version>1.0.1.4</Version>
+    <PackageVersion>1.0.1.4</PackageVersion>
     <PackageId>HADEM.Fluent.Db.Dapper</PackageId>
     <Authors>HADEM</Authors>
     <Description>Provides a fluent abstraction layer for execute database command, using Dapper ORM</Description>
