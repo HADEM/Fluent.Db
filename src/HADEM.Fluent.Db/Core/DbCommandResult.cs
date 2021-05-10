@@ -2,12 +2,19 @@
 
 namespace HADEM.Fluent.Db
 {
+    using System;
+
     /// <summary>
     /// Represent the result of a <see cref="DbObjectCommand{T}"/> or <see cref="DbObjectCommand"/>
     /// executed on the database.
     /// </summary>
     public class DbCommandResult
     {
+        /// <summary>
+        /// Gets or Sets the execution elapsed time.
+        /// </summary>
+        public TimeSpan ElapsedTime { get; set; }
+
         /// <summary>
         /// Gets or Sets the number of rows impacted by the command.
         /// </summary>

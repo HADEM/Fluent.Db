@@ -36,7 +36,7 @@ namespace HADEM.Fluent.Db.Interfaces
         /// <param name="dispatcherPostExecution">Optional post action to execute.</param>
         /// <param name="throwException">When TRUE, rethrows the exception.</param>
         /// <returns>The <see cref="DbCommandResult"/> with the information about the execution.</returns>
-        Task<DbCommandResult> ExecuteAsync(string sql, Action dispatcherPostExecution = null, bool throwException = false);
+        Task<DbCommandResult> ExecuteAsync(string sql, Action? dispatcherPostExecution = null, bool throwException = false);
 
         /// <summary>
         /// Execute asynchronously a database command object in a safe way and return a <see cref="DbCommandResult"/>.

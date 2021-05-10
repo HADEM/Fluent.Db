@@ -4,6 +4,7 @@ namespace HADEM.Fluent.Db
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using HADEM.Fluent.Db.Exception;
@@ -26,6 +27,8 @@ namespace HADEM.Fluent.Db
             int retries = 1;
             bool isExecuted = false;
 
+            Stopwatch stopwatch = new Stopwatch();
+
             if (retry != null && retry.MaxRetries >= 1)
             {
                 retries = retry.MaxRetries;
@@ -38,6 +41,8 @@ namespace HADEM.Fluent.Db
             }
 
             DbCommandResult? result = null;
+            stopwatch.Start();
+
             Stack<System.Exception> exceptions = new Stack<System.Exception>();
 
             // Execute the actions inside the retry policy
@@ -70,6 +75,8 @@ namespace HADEM.Fluent.Db
                 }
             }
 
+            stopwatch.Stop();
+
             if (result == null)
             {
                 result = new DbCommandResult();
@@ -77,6 +84,8 @@ namespace HADEM.Fluent.Db
                 result.Result = -1;
                 result.Exception = new AggregateException("One or more exception(s) occured", exceptions.ToArray());
             }
+
+            result.ElapsedTime = stopwatch.Elapsed;
 
             // We passed the max retries.
             if (!isExecuted || retries <= 0)
